@@ -1,0 +1,60 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>Kafka Test</title>
+		<style>
+			
+		</style>
+	</head>
+</html>
+
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="http://192.168.1.154:1337/socket.io/socket.io.js"></script>
+
+<script>
+	var socket;
+	
+	function Connect()
+	{
+		
+		socket = io.connect(':1337');
+		$('#sys_message').text("Connected");
+		
+		socket.on('changed',function(num)
+		{
+			$('#sys_message').text(num);
+		});
+	}
+	
+	function Disconnect()
+	{
+		socket.disconnect();
+		$('#sys_message').text("Disconnected");
+	}
+	
+	function Increase(anon)
+	{
+		socket.emit('increase',anon);
+	}
+	
+	function Decrease()
+	{
+		socket.emit('decrease');
+	}
+			
+	
+
+</script>
+
+<body>
+	<form action="">
+		<p id="sys_message">Push the button</p>
+		<input type="button" value="Connect" onclick="Connect()"></input>
+		<input type="button" value="Increase Counter" onclick="Increase(false)"></input>
+		<input type="button" value="Increase Anonymously" onclick="Increase(true)"></input>
+		<input type="button" value="Decrease Anonymously" onclick="Increase()"></input>
+		<input type="button" value="Decrease Counter" onclick="Decrease()"></input>
+		<input type="button" value="Disconnect" onclick="Disconnect()"></input>
+	</form>
+</body>
