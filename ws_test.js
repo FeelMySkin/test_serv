@@ -3,6 +3,7 @@ var wsPort = 3389;
 var WebSocketServer = require('websocket').server;
 var http = require('http');
 var clients = [];
+var counter = 0;
 
 var server = http.createServer(function(request,response)
 {
@@ -20,7 +21,7 @@ var wsServer = new WebSocketServer({
 
 function SendAll()
 {
-	var obj = {type: 'show',mess:'tst'};
+	var obj = {type: 'show',mess:counter};
 	var json = JSON.stringify(obj);
 	for(var i = 0;i<clients.length;i++)
 	{
@@ -34,7 +35,7 @@ wsServer.on('request', function(request)
 
 	var connection = request.accept(null, request.origin);
 	var index = clients.push(connection) - 1;
-	
+
 	console.log("Connected " + index);
 
 	connection.on('message',function(message)
@@ -45,9 +46,16 @@ wsServer.on('request', function(request)
 		switch(json.type)
 		{
 			case 'increase':
-				console.log(json.anon);
-				SendAll();
-				break;
+				counter++;
+				console.log(counter);
+				if(!json.anon) SendAll();
+				else
+				{
+					var obj = {type:'show', mess=counter};
+					var json = JSON.stringify(obj);
+					connection.send(json);
+				}
+			break;
 
 			default:
 				break;
