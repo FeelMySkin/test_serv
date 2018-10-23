@@ -34,12 +34,7 @@ wsServer.on('request', function(request)
 });
 
 
-
-
-
-
-
-var io = require('socket.io')(3389);
+/*var io = require('socket.io')(3389);
 var counter = 0;
 
 io.on('connection', function(socket)
@@ -65,4 +60,4 @@ io.on('connection', function(socket)
 	{
 		console.log("User disconnected " +socket.id);
 	});
-});
+});*/
