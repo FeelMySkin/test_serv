@@ -51,7 +51,7 @@ wsServer.on('request', function(request)
 				if(!json.anon) SendAll();
 				else
 				{
-					var obj = {type:'show', mess=counter};
+					var obj = {type:'show', mess:counter};
 					var json = JSON.stringify(obj);
 					connection.send(json);
 				}
