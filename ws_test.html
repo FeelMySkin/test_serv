@@ -27,11 +27,11 @@
 		socket.onmessage = function(message)
 		{
 			var json = JSON.parse(message.data);
-			
-			switch(json.data.type)
+			console.log(json);
+			switch(json.type)
 			{
 				case 'show':
-					$('#sys_message').text(json.data.mess);
+					$('#sys_message').text(json.mess);
 					break;
 			}
 		};

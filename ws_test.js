@@ -18,6 +18,16 @@ var wsServer = new WebSocketServer({
 	httpServer: server
 });
 
+function SendAll()
+{
+	var obj = {type: 'show',mess:'tst'};
+	var json = JSON.stringify(obj);
+	for(var i = 0;i<clients.length;i++)
+	{
+		clients[i].send(json);
+	}
+}
+
 wsServer.on('request', function(request)
 {
 	console.log('Connect from ' + request.origin + '.');
@@ -36,6 +46,7 @@ wsServer.on('request', function(request)
 		{
 			case 'increase':
 				console.log(json.anon);
+				SendAll();
 				break;
 
 			default:
