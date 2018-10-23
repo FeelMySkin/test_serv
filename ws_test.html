@@ -46,13 +46,15 @@
 	function Increase(anon)
 	{
 		var obj = {type: 'increase', anon:anon};
-		socket.emit('increase',anon);
+		var json = JSON.stringify(obj);
+		socket.send(json);
 	}
 	
 	function Decrease(anon)
 	{
 		var obj = {type: 'decrease', anon:anon};
-		socket.emit('decrease');
+		var json = JSON.stringify(obj);
+		socket.send(obj);
 	}
 			
 

@@ -20,10 +20,24 @@ var wsServer = new WebSocketServer({
 
 wsServer.on('request', function(request)
 {
-	console.log('Connected from ' + request.origin + '.');
+	console.log('Connect from ' + request.origin + '.');
 
 	var connection = request.accept(null, request.origin);
-})
+	var index = clients.push(connection) - 1;
+	
+	console.log("Connected");
+
+	connection.on('message',function(message)
+	{
+		console.log(message);
+	});
+});
+
+
+
+
+
+
 
 var io = require('socket.io')(3389);
 var counter = 0;
