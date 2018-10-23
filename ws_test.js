@@ -30,11 +30,16 @@ wsServer.on('request', function(request)
 	connection.on('message',function(message)
 	{
 		console.log(message);
-		var json = JSON.parse(message.data);
-		switch(json.data.type)
+		var json = JSON.parse(message.utf8Data);
+		console.log(json);
+		switch(json.type)
 		{
 			case 'increase':
-				console.log
+				console.log(json.anon);
+				break;
+
+			default:
+				break;
 		}
 	});
 
