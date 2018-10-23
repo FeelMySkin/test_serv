@@ -42,6 +42,7 @@ wsServer.on('request', function(request)
 	{
 		clients.splice(index,1);
 		console.log('Disconnected ' +  index);
+	});
 });
 
 
