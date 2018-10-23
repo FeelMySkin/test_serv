@@ -1,0 +1,71 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>WebScoket Test</title>
+		<style>
+			
+		</style>
+	</head>
+</html>
+
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+<script>
+	var socket;
+	
+	function Connect()
+	{
+		
+		socket = new WebSocket("ws://trirozhka.ru:3389");
+
+		socket.onopen = function()
+		{
+			$('#sys_message').text("Connected");
+		}
+		
+		socket.onmessage = function(message)
+		{
+			var json = JSON.parse(message.data);
+			
+			switch(json.data.type)
+			{
+				case 'show':
+					$('#sys_message').text(json.data.mess);
+					break;
+			}
+		};
+	}
+	
+	function Disconnect()
+	{
+		socket.disconnect();
+		$('#sys_message').text("Disconnected");
+	}
+	
+	function Increase(anon)
+	{
+		var obj = {type: 'increase', anon:anon};
+		socket.emit('increase',anon);
+	}
+	
+	function Decrease(anon)
+	{
+		var obj = {type: 'decrease', anon:anon};
+		socket.emit('decrease');
+	}
+			
+
+</script>
+
+<body>
+	<form action="">
+		<p id="sys_message">Push the button</p>
+		<input type="button" value="Connect" onclick="Connect()"></input>
+		<input type="button" value="Increase Counter" onclick="Increase(false)"></input>
+		<input type="button" value="Increase Anonymously" onclick="Increase(true)"></input>
+		<input type="button" value="Decrease Anonymously" onclick="Decrease(true)"></input>
+		<input type="button" value="Decrease Counter" onclick="Decrease(false)"></input>
+		<input type="button" value="Disconnect" onclick="Disconnect()"></input>
+	</form>
+</body>
