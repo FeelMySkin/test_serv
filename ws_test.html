@@ -39,7 +39,7 @@
 	
 	function Disconnect()
 	{
-		socket.disconnect();
+		socket.close();
 		$('#sys_message').text("Disconnected");
 	}
 	

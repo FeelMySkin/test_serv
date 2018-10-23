@@ -25,12 +25,17 @@ wsServer.on('request', function(request)
 	var connection = request.accept(null, request.origin);
 	var index = clients.push(connection) - 1;
 	
-	console.log("Connected");
+	console.log("Connected " + index);
 
 	connection.on('message',function(message)
 	{
 		console.log(message);
 	});
+
+	connection.on('close', function(connection)
+	{
+		clients.splice(index,1);
+		console.log('Disconnected ' +  index);
 });
 
 
