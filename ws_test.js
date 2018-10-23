@@ -57,6 +57,17 @@ wsServer.on('request', function(request)
 				}
 			break;
 
+			case 'decrease':
+				counter--;
+				console.log(counter);
+				if(!json.anon) SendAll();
+				else
+				{
+					var obj = {type: 'show', mess:counter};
+					var json = JSON.stringify(obj);
+					connection.send(json);
+				}
+
 			default:
 				break;
 		}
