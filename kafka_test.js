@@ -1,4 +1,4 @@
-var io = require('socket.io')(1337);
+var io = require('socket.io')(3389);
 var counter = 0;
 
 io.on('connection', function(socket)

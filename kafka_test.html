@@ -10,7 +10,7 @@
 </html>
 
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script src="http://192.168.1.154:1337/socket.io/socket.io.js"></script>
+<script src="http://trirozhka.ru:3389/socket.io/socket.io.js"></script>
 
 <script>
 	var socket;
@@ -18,7 +18,7 @@
 	function Connect()
 	{
 		
-		socket = io.connect(':1337');
+		socket = io.connect(':3389');
 		$('#sys_message').text("Connected");
 		
 		socket.on('changed',function(num)
