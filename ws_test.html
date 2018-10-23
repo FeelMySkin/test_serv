@@ -19,7 +19,7 @@
 
 		socket.onopen = function()
 		{
-			document.getElementById('sys_message').text("Connected");
+			document.getElementById('sys_message').innerText="Connected";
 		}
 		
 		socket.onmessage = function(message)
@@ -29,7 +29,7 @@
 			switch(json.type)
 			{
 				case 'show':
-					document.getElementById('sys_message').text(json.mess);
+					document.getElementById('sys_message').innerText=json.mess;
 					break;
 			}
 		};
@@ -38,7 +38,7 @@
 	function Disconnect()
 	{
 		socket.close();
-		document.getElementById('sys_message').text("Disconnected");
+		document.getElementById('sys_message').innerText="Disconnected";
 	}
 	
 	function Increase(anon)
