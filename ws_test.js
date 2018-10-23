@@ -30,6 +30,12 @@ wsServer.on('request', function(request)
 	connection.on('message',function(message)
 	{
 		console.log(message);
+		var json = JSON.parse(message);
+		switch(json.data.type)
+		{
+			case 'increase':
+				console.log
+		}
 	});
 
 	connection.on('close', function(connection)
