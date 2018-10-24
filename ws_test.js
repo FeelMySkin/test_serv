@@ -2,10 +2,12 @@ var wsPort = 3389;
 
 var WebSocketServer = require('websocket').server;
 var http = require('http');
+var kafka = require('kafka-node');
+
 var clients = [];
 var counter = 0;
 
-var k_client = new kafka.KafkaClient({kafkaHost: 'localhost:2181'});
+var k_client = new kafka.KafkaClient();
 
 var server = http.createServer(function(request,response)
 {
