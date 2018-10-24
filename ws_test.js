@@ -70,7 +70,7 @@ wsServer.on('request', function(request)
 			break;
 
 			case 'save_db':
-				console.log(save_received);
+				console.log('save_received');
 				var obj = {type: 'saved', mess:'Saved'};
 				connection.send(JSON.stringify(obj));
 			break;
