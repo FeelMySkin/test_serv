@@ -8,7 +8,14 @@ var counter = 0;
 
 var k_client = new kafka.KafkaClient({kafkaHost: 'localhost:9092'});
 var producer = new kafka.Producer(k_client);
-var payload = {topic: 'test_topic', messages: 'tst', partition: 0};
+var payload = [{topic: 'test_topic', messages: 'tst'}];
+
+var consumer = new kafka.Consumer(k_client,[{topic: 'test_topic'}]);
+
+consumer.on('message',function(message)
+{
+	console.log(message);
+});
 
 producer.on('ready',function()
 {
