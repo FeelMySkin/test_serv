@@ -1,13 +1,22 @@
-var wsPort = 3389;
-
 var WebSocketServer = require('websocket').server;
 var http = require('http');
 var kafka = require('kafka-node');
 
+var wsPort = 3389;
 var clients = [];
 var counter = 0;
 
-var k_client = new kafka.KafkaClient();
+var k_client = new kafka.KafkaClient({kafkaHost: 'localhost:9092'});
+var producer = new kafka.Producer(k_client);
+var payload = {topic: 'test_topic', messages: 'tst', partition: 0};
+
+producer.on('ready',function()
+{
+	producer.send(payload,function(err,data)
+	{
+		console.log(data)
+	});
+});
 
 var server = http.createServer(function(request,response)
 {
