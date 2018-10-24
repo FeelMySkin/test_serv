@@ -67,6 +67,13 @@ wsServer.on('request', function(request)
 					var json = JSON.stringify(obj);
 					connection.send(json);
 				}
+			break;
+
+			case 'save_db':
+				console.log(save_received);
+				var obj = {type: 'saved', mess:'Saved'};
+				connection.send(JSON.stringify(obj));
+			break;
 
 			default:
 				break;
@@ -80,31 +87,3 @@ wsServer.on('request', function(request)
 	});
 });
 
-
-/*var io = require('socket.io')(3389);
-var counter = 0;
-
-io.on('connection', function(socket)
-{
-	console.log("user connected "  + socket.id);
-	
-	socket.on('increase', function(anon)
-	{
-		counter++;
-		console.log("Increased " + socket.id);
-		if(!anon) io.emit('changed',counter);
-		else io.to(socket.id).emit('changed',counter);
-	});
-	
-	socket.on('decrease',function()
-	{
-		counter--;
-		console.log("Decreased " + socket.id);
-		io.emit('changed',counter);
-	});
-	
-	socket.on('disconnect',function()
-	{
-		console.log("User disconnected " +socket.id);
-	});
-});*/

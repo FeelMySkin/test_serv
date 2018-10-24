@@ -31,6 +31,10 @@
 				case 'show':
 					document.getElementById('sys_message').innerText=json.mess;
 					break;
+
+				case 'saved':
+					document.getElementById('sys_message').innerText=json.stat;
+					break;
 			}
 		};
 	}
@@ -57,9 +61,10 @@
 
 	function SaveToDB()
 	{
-		var el = document.getElementById('sys_message');
 		var date = new Date();
-		el.innerHTML = date;
+		var obj = {type: 'save_db', date: date};
+		var json = JSON.stringify(obj);
+		socket.send(json);
 	}
 
 	function LoadDB()
