@@ -54,6 +54,17 @@
 		var json = JSON.stringify(obj);
 		socket.send(json);
 	}
+
+	function SaveToDB()
+	{
+		var el = document.getElementById('sys_message');
+		el.innerHTML = Date.now();
+	}
+
+	function LoadDB()
+	{
+
+	}
 			
 
 </script>
@@ -61,11 +72,13 @@
 <body>
 	<form action="">
 		<p id="sys_message">Push the button</p>
-		<input type="button" value="Connect" onclick="Connect()"></input>
-		<input type="button" value="Increase Counter" onclick="Increase(false)"></input>
-		<input type="button" value="Increase Anonymously" onclick="Increase(true)"></input>
-		<input type="button" value="Decrease Anonymously" onclick="Decrease(true)"></input>
-		<input type="button" value="Decrease Counter" onclick="Decrease(false)"></input>
-		<input type="button" value="Disconnect" onclick="Disconnect()"></input>
+		<input type="button" value="Connect" onclick="Connect()">
+		<input type="button" value="Increase Counter" onclick="Increase(false)">
+		<input type="button" value="Increase Anonymously" onclick="Increase(true)">
+		<input type="button" value="Decrease Anonymously" onclick="Decrease(true)">
+		<input type="button" value="Decrease Counter" onclick="Decrease(false)">
+		<input type="button" value="Disconnect" onclick="Disconnect()">
+		<input type="button" value="Save to DB" onclick="SaveToDB()">
+		<input type="button" value="Load From DB" onclick="LoadDB()">
 	</form>
 </body>
