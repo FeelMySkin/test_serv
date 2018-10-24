@@ -58,7 +58,8 @@
 	function SaveToDB()
 	{
 		var el = document.getElementById('sys_message');
-		el.innerHTML = Date.now();
+		var date = new Date();
+		el.innerHTML = date;
 	}
 
 	function LoadDB()
