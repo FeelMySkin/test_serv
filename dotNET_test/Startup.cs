@@ -37,11 +37,11 @@ namespace dotNET_test
 
             var webSocketOptions = new WebSocketOptions()
             {
-                KeepAliveInterval =TimeSpan.FromSeconds(5);
-                ReceiveBufferSize = 4096;
+                KeepAliveInterval =TimeSpan.FromSeconds(5),
+                ReceiveBufferSize = 4096
             }
 
-            app.UseWebSockets();
+            app.UseWebSockets(webSocketOptions);
 
             app.Use(async (context, next) =>
             {
