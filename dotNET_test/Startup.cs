@@ -39,7 +39,7 @@ namespace dotNET_test
             {
                 KeepAliveInterval =TimeSpan.FromSeconds(5),
                 ReceiveBufferSize = 4096
-            }
+            };
 
             app.UseWebSockets(webSocketOptions);
 
