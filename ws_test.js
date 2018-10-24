@@ -5,6 +5,8 @@ var http = require('http');
 var clients = [];
 var counter = 0;
 
+var k_client = new kafka.KafkaClient({kafkaHost: 'localhost:2181'});
+
 var server = http.createServer(function(request,response)
 {
 
