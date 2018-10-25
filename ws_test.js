@@ -1,6 +1,7 @@
 var WebSocketServer = require('websocket').server;
 var http = require('http');
 var kafka = require('kafka-node');
+var Cookies = require ('cookies');
 
 var wsPort = 3389;
 var clients = [];
