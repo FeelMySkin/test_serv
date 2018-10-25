@@ -28,7 +28,8 @@ producer.on('ready',function()
 
 var server = http.createServer(function(request,response)
 {
-
+	console.log(request);
+	console.log(response);
 });
 
 server.listen(wsPort, function()
