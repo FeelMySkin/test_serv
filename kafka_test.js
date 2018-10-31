@@ -14,7 +14,7 @@ k_client.createTopics([{topic: 'test_topic', partitions:1, replicationFactor:1}]
 	console.log('Result: ' + result);
 });
 
-var consumer = new kafka.Consumer(k_client,[[{topic: 'test_topic'}]]);
+var consumer = new kafka.Consumer(k_client,[]);
 
 consumer.on('message', function(mess)
 {
