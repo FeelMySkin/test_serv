@@ -1,5 +1,5 @@
 var io = require('socket.io')(3389);
-var Kafka = require('kafka-node');
+var kafka = require('kafka-node');
 var crypto = require('crypto');
 
 const hash = crypto.createHash('sha256');
@@ -8,7 +8,7 @@ var counter = 0;
 var k_client = new kafka.KafkaClient({kafkaHost: 'localhost:9092'});
 var producer = new kafka.Producer(k_client);
 
-producer.createTopics([{topic: 'test_topic', partitions:1, replicationFactor:1}],(error,result) => 
+k_client.createTopics([{topic: 'test_topic', partitions:1, replicationFactor:1}],(error,result) => 
 {
 	console.log('Error: ' + error);
 	console.log('Result: ' + result);
