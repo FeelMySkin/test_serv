@@ -25,4 +25,9 @@ io.on('connection', function(socket)
 	{
 		console.log("User disconnected " +socket.id);
 	});
+
+	socket.on('acc_create', function(mail,pass)
+	{
+		console.log('acc create received: ' + mail + "; " + pass);
+	});
 });

@@ -42,6 +42,57 @@
 	{
 		socket.emit('decrease',anon);
 	}
+
+	function Creator()
+	{
+		
+		var mail = document.getElementById('mail');
+		var pass = document.getElementById('pass');
+
+		if(mail == null || pass == null) return;
+
+		socket.emit('acc_create', mail.value, pass.value);
+
+		document.getElementById('sys_message').innerText = "Account Created with mail: " + mail.value + '; password: ' + pass.value;
+
+	}
+
+
+	function CreateAccount()
+	{
+		var creator = document.getElementById('creator');
+		if(creator != null)
+		{
+			document.body.removeChild(creator);
+		}
+		else
+		{
+			creator = document.createElement('form');
+			creator.id = "creator";
+			var mail_input = document.createElement('input');
+			mail_input.id = 'mail';
+			var pass_input = document.createElement('input');
+			pass_input.id = 'pass';
+			pass_input.type = 'password';
+			var ok = document.createElement('input');
+			ok.type = 'button';
+			ok.value = 'Create';
+			ok.addEventListener('click', Creator)
+
+			creator.appendChild(mail_input);
+			creator.appendChild(pass_input);
+			creator.appendChild(ok);
+			document.body.appendChild(creator);
+		}
+		
+	}
+
+	
+
+	function Login()
+	{
+
+	}
 			
 	
 
@@ -56,5 +107,7 @@
 		<input type="button" value="Decrease Anonymously" onclick="Decrease(true)"></input>
 		<input type="button" value="Decrease Counter" onclick="Decrease(false)"></input>
 		<input type="button" value="Disconnect" onclick="Disconnect()"></input>
+		<input type="button" value="Create Account" onclick="CreateAccount()">
+		<input type="button" value="Login" onclick="Login()">
 	</form>
 </body>
