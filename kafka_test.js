@@ -13,11 +13,12 @@ io.on('connection', function(socket)
 		else io.to(socket.id).emit('changed',counter);
 	});
 	
-	socket.on('decrease',function()
+	socket.on('decrease',function(anon)
 	{
 		counter--;
 		console.log("Decreased " + socket.id);
-		io.emit('changed',counter);
+		if(!anon) io.emit('changed',counter);
+		else io.to(socket.id).emit('changed',counter);
 	});
 	
 	socket.on('disconnect',function()

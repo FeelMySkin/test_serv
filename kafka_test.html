@@ -38,9 +38,9 @@
 		socket.emit('increase',anon);
 	}
 	
-	function Decrease()
+	function Decrease(anon)
 	{
-		socket.emit('decrease');
+		socket.emit('decrease',anon);
 	}
 			
 	
@@ -53,8 +53,8 @@
 		<input type="button" value="Connect" onclick="Connect()"></input>
 		<input type="button" value="Increase Counter" onclick="Increase(false)"></input>
 		<input type="button" value="Increase Anonymously" onclick="Increase(true)"></input>
-		<input type="button" value="Decrease Anonymously" onclick="Increase()"></input>
-		<input type="button" value="Decrease Counter" onclick="Decrease()"></input>
+		<input type="button" value="Decrease Anonymously" onclick="Decrease(true)"></input>
+		<input type="button" value="Decrease Counter" onclick="Decrease(false)"></input>
 		<input type="button" value="Disconnect" onclick="Disconnect()"></input>
 	</form>
 </body>
