@@ -22,7 +22,7 @@ k_client.createTopics([{topic: 'test_topic', partitions:1, replicationFactor:1}]
 
 consumer.on('message', function(mess)
 {
-	console.log("Message: " + mess);
+	console.log(mess);
 });
 
 function CreateAccount(mail,pass)
