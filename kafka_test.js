@@ -7,14 +7,18 @@ var counter = 0;
 
 var k_client = new kafka.KafkaClient({kafkaHost: 'localhost:9092'});
 var producer = new kafka.Producer(k_client);
+var consumer = new kafka.Consumer(k_client,[]);
 
 k_client.createTopics([{topic: 'test_topic', partitions:1, replicationFactor:1}],(error,result) => 
 {
-	console.log('Error: ' + error);
-	console.log('Result: ' + result);
+	console.log(err);
+	console.log(result);
+	consumer.addTopics(['test_topic'], function (err,result)
+	{
+		console.log(err);
+	console.log(result);
+	});
 });
-
-var consumer = new kafka.Consumer(k_client,[]);
 
 consumer.on('message', function(mess)
 {
