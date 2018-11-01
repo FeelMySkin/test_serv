@@ -13,7 +13,7 @@ k_client.createTopics([{topic: 'test_topic', partitions:2, replicationFactor:1}]
 {
 	console.log(error);
 	console.log(result);
-	consumer.addTopics([{topic: 'test_topic', partition:0}], function (err,result)
+	consumer.addTopics([{topic: 'test_topic', partition:1}], function (err,result)
 	{
 		console.log(err);
 	console.log(result);
