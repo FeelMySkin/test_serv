@@ -5,7 +5,7 @@ const crypto = require ('crypto');
 
 
 
-var hash = crypto.createHash('sha256');
+var hash;
 
 const db_client = new Client({
 	user: 'root',
@@ -61,8 +61,10 @@ consumer.on("message",function(mess)
 
 		if(res.rowCount == 0)
 		{
+			hash = crypto.createHash('sha256');
 			hash.write(json.pass);
 			var hsh = null;
+			hash.end();
 			while(hsh == null)
 			{
 				hsh = hash.read();
