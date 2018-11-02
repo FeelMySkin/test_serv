@@ -11,17 +11,20 @@ var consumer = new kafka.Consumer(k_client,[]);
 
 k_client.createTopics([{topic: 'test_topic', partitions:2, replicationFactor:1}],(error,result) => 
 {
+	console.log("Topic creation:");
 	console.log(error);
 	console.log(result);
 	consumer.addTopics([{topic: 'test_topic', partition:1}], function (err,result)
 	{
+		console.log("Topic added:");
 		console.log(err);
-	console.log(result);
+		console.log(result);
 	});
 });
 
 consumer.on('message', function(mess)
 {
+	console.log("Message received:");
 	console.log(mess);
 });
 
@@ -31,6 +34,7 @@ function CreateAccount(mail,pass)
 	var payload = [{topic: 'test_topic', messages: ['mail: ' + mail + ';pass: ' + pass], partition: 1, timestamp: Date.now()}];
 	producer.send(payload,function(err,data)
 	{
+		console.log("payload sent:");
 		console.log(err);
 		console.log(data);
 	});
