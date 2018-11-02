@@ -1,7 +1,9 @@
 const express = require('express');
 const {Client} = require('pg');
-var kafka = require('kafka-node');
+const kafka = require('kafka-node');
 const crypto = require ('crypto');
+
+
 
 var hash = crypto.createHash('sha256');
 
@@ -11,21 +13,15 @@ const db_client = new Client({
 	database: 'vocamsk_test',
 	password: 'clannad1',
 });
-db_client.connect();
-
-db_client.query('SELECT * FROM account_test;', function(err,res)
-{
-	
-	console.log(err);
-	console.log(res.fields.length);
-	console.log(res.rows);
-});
-
 
 var k_client = new kafka.KafkaClient({kafkaHost: 'localhost:9092'});
 var producer = new kafka.Producer(k_client);
 var consumer = new kafka.Consumer(k_client,[]);
 
+
+
+
+db_client.connect();
 k_client.createTopics([{topic: 'test_topic', partitions:2, replicationFactor:1}],(error,result) => 
 {
 	console.log("Topic creation:");
@@ -58,8 +54,11 @@ consumer.on("message",function(mess)
 				console.log(err);
 				console.log(res);
 			});
-			await hash.write(json.pass);
+
+			hash.write(json.pass);
+			while(!hash.readable) ;
 			var hsh = hash.read();
+			
 			db_client.query("INSERT INTO account_test (mail, password_hash, last_seen, username) VALUES ('" + json.mail + "', " + hsh.toString() + ", " + Date.now().toString() + ", test", function(err,res)
 			{
 				console.log("DB result:");
