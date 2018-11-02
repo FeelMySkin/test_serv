@@ -40,7 +40,8 @@ consumer.on("message",function(mess)
 {
 	console.log(mess);
 	mess.partition = 1;
-	producer.send(mess, function(err,res)
+	var payload = [mess];
+	producer.send(payload, function(err,res)
 	{
 		console.log("Sent:");
 		console.log(err);
