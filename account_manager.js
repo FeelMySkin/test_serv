@@ -38,5 +38,5 @@ k_client.createTopics([{topic: 'test_topic', partitions:2, replicationFactor:1}]
 
 consumer.on("message",function(mess)
 {
-
+	console.log(mess);
 });
