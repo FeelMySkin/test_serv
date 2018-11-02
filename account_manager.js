@@ -60,7 +60,6 @@ consumer.on("message",function(mess)
 		});
 
 		hash.write(json.pass);
-		hash.end();
 		var hsh = null;
 		while(hsh == null)
 		{
