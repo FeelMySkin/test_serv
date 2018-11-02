@@ -66,10 +66,10 @@ consumer.on("message",function(mess)
 		{
 			hsh = hash.read();
 		}
-		var str = "INSERT INTO account_test (mail, password_hash, last_seen, username) VALUES ('" + json.mail + "', " + hsh.toString('dec') + ", " + Date.now().toString() + ", test";
+		var str = "INSERT INTO account_test (mail, password_hash, username) VALUES ('" + json.mail + "', '" + hsh.toString() + "', 'test');";
 		console.log(str);
 
-		if(false) db_client.query(str, function(err,res)
+		db_client.query(str, function(err,res)
 		{
 			console.log("DB result:");
 			console.log(err);
