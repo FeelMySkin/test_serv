@@ -31,7 +31,7 @@ consumer.on('message', function(mess)
 function CreateAccount(mail,pass)
 {
 	
-	var payload = [{topic: 'test_topic', messages: ['{"mail": "' + mail + '", "pass": ' + pass + '"}'], partition: 0, timestamp: Date.now()}];
+	var payload = [{topic: 'test_topic', messages: [JSON.stringify({mail: mail, pass: pass})], partition: 0, timestamp: Date.now()}];
 	producer.send(payload,function(err,data)
 	{
 		console.log("payload sent:");
