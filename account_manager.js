@@ -66,7 +66,7 @@ consumer.on("message",function(mess)
 		{
 			hsh = hash.read();
 		}
-		var str = "INSERT INTO account_test (mail, password_hash, last_seen, username) VALUES ('" + json.mail + "', " + hsh.toString() + ", " + Date.now().toString() + ", test";
+		var str = "INSERT INTO account_test (mail, password_hash, last_seen, username) VALUES ('" + json.mail + "', " + hsh.toString('dec') + ", " + Date.now().toString() + ", test";
 		console.log(str);
 
 		if(false) db_client.query(str, function(err,res)
