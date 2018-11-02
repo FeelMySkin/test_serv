@@ -49,34 +49,33 @@ consumer.on("message",function(mess)
 		console.log(err);
 		console.log(res);
 		console.log(res.length);
-		if(res.length == 0) payload = [{topic: 'test_topic', messages: [JSON.stringify({status: true})], partition: 1, timestamp: Date.now()}];
-		else 
+		if(res.rowCount == 0) payload = [{topic: 'test_topic', messages: [JSON.stringify({status: true})], partition: 1, timestamp: Date.now()}];
+		else  payload = [{topic: 'test_topic', messages: [JSON.stringify({status: false})], partition: 1, timestamp: Date.now()}];
+
+		producer.send(payload,function(err,res)
 		{
-			payload = [{topic: 'test_topic', messages: [JSON.stringify({status: false})], partition: 1, timestamp: Date.now()}];
+			console.log("Sent:");
+			console.log(err);
+			console.log(res);
+		});
 
-			producer.send(payload,function(err,res)
-			{
-				console.log("Sent:");
-				console.log(err);
-				console.log(res);
-			});
-
-			hash.write(json.pass);
-			hash.end();
-			var hsh = null;
-			while(hsh == null)
-			{
-				hsh = hash.read();
-			}
-
-			db_client.query("INSERT INTO account_test (mail, password_hash, last_seen, username) VALUES ('" + json.mail + "', " + hsh.toString() + ", " + Date.now().toString() + ", test", function(err,res)
-			{
-				console.log("DB result:");
-				console.log(err);
-				console.log(res);
-				console.log(hsh);
-			});
+		hash.write(json.pass);
+		hash.end();
+		var hsh = null;
+		while(hsh == null)
+		{
+			hsh = hash.read();
 		}
+		var str = "INSERT INTO account_test (mail, password_hash, last_seen, username) VALUES ('" + json.mail + "', " + hsh.toString() + ", " + Date.now().toString() + ", test";
+		console.log(str);
+
+		if(false) db_client.query(str, function(err,res)
+		{
+			console.log("DB result:");
+			console.log(err);
+			console.log(res);
+			console.log(hsh);
+		});
 
 	});
 
