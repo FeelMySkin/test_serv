@@ -40,7 +40,8 @@ consumer.on("message",function(mess)
 {
 	console.log(mess);
 	var recv = mess.value;
-	console.log(recv);
+	var json = JSON.parse(recv);
+	console.log(json);
 	var payload = [{topic: 'test_topic', messages: ['status: OK'], partition: 1, timestamp: Date.now()}];
 	producer.send(payload, function(err,res)
 	{
