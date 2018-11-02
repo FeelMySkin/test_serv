@@ -15,7 +15,7 @@ db_client.query('SELECT * FROM account_test;', function(err,res)
 	
 	console.log(err);
 	console.log(res.fields);
-	console.log(rows);
+	console.log(res.rows);
 });
 
 
