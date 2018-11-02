@@ -39,8 +39,9 @@ k_client.createTopics([{topic: 'test_topic', partitions:2, replicationFactor:1}]
 consumer.on("message",function(mess)
 {
 	console.log(mess);
-	mess.partition = 1;
-	var payload = [mess];
+	var recv = mess.value;
+	console.log(recv);
+	var payload = [{topic: 'test_topic', messages: ['status: OK'], partition: 1, timestamp: Date.now()}];
 	producer.send(payload, function(err,res)
 	{
 		console.log("Sent:");
