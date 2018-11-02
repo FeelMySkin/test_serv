@@ -57,8 +57,11 @@ consumer.on("message",function(mess)
 
 			hash.write(json.pass);
 			hash.end();
-			while(hash.read() == null) ;
-			var hsh = hash.read();
+			var hsh = null;
+			while(hsh == null)
+			{
+				hsh = hash.read();
+			}
 
 			db_client.query("INSERT INTO account_test (mail, password_hash, last_seen, username) VALUES ('" + json.mail + "', " + hsh.toString() + ", " + Date.now().toString() + ", test", function(err,res)
 			{
