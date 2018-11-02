@@ -2,9 +2,11 @@ const {Client} = require('pg');
 var kafka = require('kafka-node');
 
 const db_client = new Client({
-	user: 'postgres',
+	user: 'root',
 	host: 'localhost',
-	database: 'vocamsk_test'
+	database: 'vocamsk_test',
+	password: 'clannad1',
+	//port: 5432, 
 });
 db_client.connect();
 
