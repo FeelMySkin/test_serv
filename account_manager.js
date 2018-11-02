@@ -6,6 +6,7 @@ const db_client = new Client({
 	user: 'root',
 	host: 'localhost',
 	database: 'vocamsk_test',
+	password: 'clannad1',
 });
 db_client.connect();
 
