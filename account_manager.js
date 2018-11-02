@@ -43,7 +43,7 @@ consumer.on("message",function(mess)
 	var payload;
 	console.log(json);
 
-	db_client.query("SELECT mail FROM account_test WHERE mail='" + json.mail + "';", function(err,res)
+	db_client.query("SELECT * FROM account_test WHERE mail='" + json.mail + "';", function(err,res)
 	{
 		console.log("DB:");
 		console.log(err);
@@ -59,22 +59,26 @@ consumer.on("message",function(mess)
 			console.log(res);
 		});
 
-		hash.write(json.pass);
-		var hsh = null;
-		while(hsh == null)
+		if(res.rowCount == 0)
 		{
-			hsh = hash.read();
-		}
-		var str = "INSERT INTO account_test (mail, password_hash, username) VALUES ('" + json.mail + "', '" + hsh.toString() + "', 'test');";
-		console.log(str);
+			hash.write(json.pass);
+			var hsh = null;
+			while(hsh == null)
+			{
+				hsh = hash.read();
+			}
+			var str = "INSERT INTO account_test (mail, password_hash, username) VALUES ('" + json.mail + "', '" + hsh.toString() + "', 'test');";
+			console.log(str);
 
-		db_client.query(str, function(err,res)
-		{
-			console.log("DB result:");
-			console.log(err);
-			console.log(res);
-			console.log(hsh);
-		});
+			db_client.query(str, function(err,res)
+			{
+				console.log("DB result:");
+				console.log(err);
+				console.log(res);
+				console.log(hsh);
+			});
+		}
+		else console.log("Exists");
 
 	});
 
