@@ -1,6 +1,9 @@
 const express = require('express');
 const {Client} = require('pg');
 var kafka = require('kafka-node');
+const crypto = require ('crypto');
+
+var hash = crypto.createHash('sha256');
 
 const db_client = new Client({
 	user: 'root',
@@ -41,12 +44,30 @@ consumer.on("message",function(mess)
 	console.log(mess);
 	var recv = mess.value;
 	var json = JSON.parse(recv);
+	var payload;
 	console.log(json);
-	var payload = [{topic: 'test_topic', messages: ['status: OK'], partition: 1, timestamp: Date.now()}];
-	producer.send(payload, function(err,res)
+
+	db_client.query("SELECT mail FROM account_test WHERE mail='" + json.mail + "';", function(err,res)
 	{
-		console.log("Sent:");
-		console.log(err);
-		console.log(mess);
+			if(res.length == 0) payload = [{topic: 'test_topic', messages: [JSON.stringify({status: true})], partition: 1, timestamp: Date.now()}];
+			else payload = [{topic: 'test_topic', messages: [JSON.stringify({status: false})], partition: 1, timestamp: Date.now()}];
+
+			producer.send(payload,function(err,res)
+			{
+				console.log("Sent:");
+				console.log(err);
+				console.log(res);
+			});
+			await hash.write(json.pass);
+			var hsh = hash.read();
+			db_client.query("INSERT INTO account_test (mail, password_hash, last_seen, username) VALUES ('" + json.mail + "', " + hsh.toString() + ", " + Date.now().toString() + ", test", function(err,res)
+			{
+				console.log("DB result:");
+				console.log(err);
+				console.log(res);
+				console.log(hsh);
+			});
+
 	});
+
 });

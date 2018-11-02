@@ -1,8 +1,5 @@
 var io = require('socket.io')(3389);
 var kafka = require('kafka-node');
-var crypto = require('crypto');
-
-const hash = crypto.createHash('sha256');
 var counter = 0;
 
 var k_client = new kafka.KafkaClient({kafkaHost: 'localhost:9092'});
