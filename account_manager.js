@@ -56,6 +56,7 @@ consumer.on("message",function(mess)
 			});
 
 			hash.write(json.pass);
+			hash.end();
 			while(hash.read() == null) ;
 			var hsh = hash.read();
 
