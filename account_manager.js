@@ -45,8 +45,14 @@ consumer.on("message",function(mess)
 
 	db_client.query("SELECT mail FROM account_test WHERE mail='" + json.mail + "';", function(err,res)
 	{
-			if(res.length == 0) payload = [{topic: 'test_topic', messages: [JSON.stringify({status: true})], partition: 1, timestamp: Date.now()}];
-			else payload = [{topic: 'test_topic', messages: [JSON.stringify({status: false})], partition: 1, timestamp: Date.now()}];
+		console.log("DB:");
+		console.log(err);
+		console.log(res);
+		console.log(res.length);
+		if(res.length == 0) payload = [{topic: 'test_topic', messages: [JSON.stringify({status: true})], partition: 1, timestamp: Date.now()}];
+		else 
+		{
+			payload = [{topic: 'test_topic', messages: [JSON.stringify({status: false})], partition: 1, timestamp: Date.now()}];
 
 			producer.send(payload,function(err,res)
 			{
@@ -70,6 +76,7 @@ consumer.on("message",function(mess)
 				console.log(res);
 				console.log(hsh);
 			});
+		}
 
 	});
 
