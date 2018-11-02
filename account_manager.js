@@ -1,3 +1,4 @@
+const express = require('express');
 const {Client} = require('pg');
 var kafka = require('kafka-node');
 
@@ -5,15 +6,15 @@ const db_client = new Client({
 	user: 'root',
 	host: 'localhost',
 	database: 'vocamsk_test',
-	password: 'clannad1',
-	//port: 5432, 
 });
 db_client.connect();
 
 db_client.query('SELECT * FROM account_test;', function(err,res)
 {
+	
 	console.log(err);
-	console.log(res);
+	console.log(res.fields);
+	console.log(rows);
 });
 
 
