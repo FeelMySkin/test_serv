@@ -36,11 +36,16 @@ Hashable().then(
         console.log("Promise:");
         console.log(data.toString('hex'));
         console.log("Time: " + (Date.now() - tim2).toString());
+        return "test";
     },
 
     error =>
     {
 
     }
-)
+).then(function(data)
+    {
+        console.log(data);
+    }
+);
 console.log("End");
