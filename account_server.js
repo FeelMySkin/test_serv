@@ -24,7 +24,7 @@ k_client.createTopics([{topic: topic, partitions:2, replicationFactor:1}],(error
 consumer.on('message',function(mess)
 {
     console.log(mess);
-    var unpacked = JSON.parse(mess)
+    var unpacked = JSON.parse(mess.value)
     {
         switch(unpacked.signal)
         {
