@@ -34,7 +34,7 @@ Hashable().then(
     data => 
     {
         console.log("Promise:");
-        console.log(data.toString('hex'));
+        console.log(data.toString());
         console.log("Time: " + (Date.now() - tim2).toString());
         return "OK";
     },

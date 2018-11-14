@@ -115,7 +115,7 @@ function Register(json)
 	})
 	.then(result =>
 	{
-		InsertToDB('account_test',{mail:json.mail, password_hash:json.password_hash.data, username: json.username});
+		InsertToDB('account_test',{mail:json.mail, password_hash:json.password_hash, username: json.username});
 	})
 	.catch(rej =>
 	{
