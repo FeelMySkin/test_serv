@@ -79,11 +79,14 @@ function InsertToDB(table_name, properties)
 	prop_field = prop_field.slice(0,prop_field-2) + ')';
 
 	var query = "INSERT INTO " + table_name + ' ' + prop_name + " VALUES " + prop_field + ';';
+	console.log(query);
 
 	return new Promise(function(resolve, reject)
 	{
 		db_client.query(query,function(err,res)
 		{
+			console.log(err);
+			console.log(res);
 			resolve(res);
 		});
 	});
