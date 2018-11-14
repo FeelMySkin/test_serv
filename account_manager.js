@@ -110,7 +110,7 @@ function Register(json)
 		if(res.rowCount == 0) resolve("1");
 		else reject("Account Exists");
 	})
-	.then(res =>
+	.then(result =>
 	{
 		InsertToDB('account_test',{mail:json.mail, password_hash:json.password_hash.data, username: json.username});
 	})
