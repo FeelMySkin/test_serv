@@ -55,7 +55,7 @@ function CountHash(text)
 {
     return new Promise(function(resolve,reject)
     {
-        var hash = Crypto.createHash("sha256");
+        var hash = crypto.createHash("sha256");
         hash.write(text);
         hash.end();
 
