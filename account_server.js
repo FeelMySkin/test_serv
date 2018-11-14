@@ -78,7 +78,7 @@ io.on('connection', function(socket)
         CountHash(unpacked.pass)
         .then( (hash) =>
             {
-                var backpacked = JSON.stringify({signal: 'register', mail:mail, password_hash: hash,username:username, socket_id: socket.id});
+                var backpacked = JSON.stringify({signal: 'register', mail:unpacked.mail, password_hash: hash,username:unpacked.username, socket_id: socket.id});
                 SendToKafka(backpacked);
             });
 	});
