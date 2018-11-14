@@ -107,8 +107,8 @@ function Register(json)
 
 		SendToKafka(backpack);
 		console.log("Sent to KAFKA!");
-		if(res.rowCount == 0) resolve("1");
-		else reject("Account Exists");
+		if(res.rowCount == 0) return "1";
+		else throw "Account Exists";
 	})
 	.then(result =>
 	{

@@ -36,7 +36,7 @@ Hashable().then(
         console.log("Promise:");
         console.log(data.toString('hex'));
         console.log("Time: " + (Date.now() - tim2).toString());
-        return "test";
+        return "OK";
     },
 
     error =>
@@ -49,3 +49,23 @@ Hashable().then(
     }
 );
 console.log("End");
+
+function Test()
+{
+    return new Promise((resolve,reject) =>
+    {
+        reject("test_err");
+    });
+}
+
+Test()
+.then(
+    result => {console.log(result); return "test2";},
+    error => {console.log(error); throw error+1;}
+)
+.then(
+    result => {console.log(result);}
+)
+.catch(
+    error => console.log(error)
+);
