@@ -81,8 +81,8 @@ function InsertToDB(table_name, properties)
 		prop_field += properties[x] + ', ';
 	}
 
-	prop_name = prop_name.slice(0,prop_name-2) + ')';
-	prop_field = prop_field.slice(0,prop_field-2) + ')';
+	prop_name = prop_name.slice(0,prop_name.length-2) + ')';
+	prop_field = prop_field.slice(0,prop_field.length-2) + ')';
 
 	var query = "INSERT INTO " + table_name + ' ' + prop_name + " VALUES " + prop_field + ';';
 	console.log(query);
