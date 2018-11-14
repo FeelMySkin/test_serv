@@ -106,6 +106,7 @@ function Register(json)
 		else backpack = JSON.stringify({signal:'register', socket_id: json.socket_id, status:false, message:'Account Exists'});
 
 		SendToKafka(backpack);
+		console.log("Sent to KAFKA!");
 		if(res.rowCount == 0) resolve(1);
 		else reject(1);
 	})
