@@ -71,6 +71,7 @@ function InsertToDB(table_name, properties)
 {
 	var prop_name = "(";
 	var prop_field = "(";
+	console.log(properties);
 
 	for (x in properties)
 	{
