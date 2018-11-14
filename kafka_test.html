@@ -25,6 +25,11 @@
 		{
 			$('#sys_message').text(num);
 		});
+
+		socket.on('register',function(mess)
+		{
+			console.log(mess);
+		});
 	}
 	
 	function Disconnect()
@@ -51,7 +56,7 @@
 
 		if(mail == null || pass == null) return;
 
-		socket.emit('acc_create', mail.value, pass.value);
+		socket.emit('register', JSON.stringify({mail: mail.value, pass:pass.value, username: "tst"}));
 
 		document.getElementById('sys_message').innerText = "Account Created with mail: " + mail.value + '; password: ' + pass.value;
 

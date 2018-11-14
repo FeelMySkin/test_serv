@@ -30,7 +30,7 @@ consumer.on('message',function(mess)
         {
             case 'register':
                 var backpacked = JSON.stringify({status:unpacked.status, message:unpacked.message})
-                io.to(unpacked.socket_id).emit(backpacked);
+                io.to(unpacked.socket_id).emit('register',backpacked);
                 break;
 
             default:
@@ -70,7 +70,7 @@ io.on('connection', function(socket)
 {
 	console.log("user connected "  + socket.id);
 
-	socket.on('register', function(json)
+	socket.on('register', function(json) //json: {mail, pass, username}
 	{
         var unpacked = JSON.parse(json);
 		console.log('acc create received: \nmail: ' + unpacked.mail + ";\npass: " + unpacked.pass +";\nusername: " + unpacked.username);
