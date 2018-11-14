@@ -53,11 +53,14 @@ function GetFromDB(table_name,columns,conditions = null)
 	var query = "SELECT " + columns + " FROM " + table_name;
 	if(conditions != null) query += " WHERE " + conditions + ';';
 	else query += ';';
+	console.log(query);
 	
 	return new Promise(function(resolve,reject)
 	{
 		db_client.query(query,function(err,res)
 		{
+			console.log(err);
+			console.log(res);
 			resolve(res);
 		});
 	});
