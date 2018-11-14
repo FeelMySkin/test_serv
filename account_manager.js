@@ -121,45 +121,4 @@ consumer.on("message",function(mess)
 			Register(json);
 	}
 
-	db_client.query("SELECT * FROM account_test WHERE mail='" + json.mail + "';", function(err,res)
-	{
-		console.log("DB:");
-		console.log(err);
-		console.log(res);
-		console.log(res.length);
-		if(res.rowCount == 0) payload = [{topic: topic, messages: [JSON.stringify({status: true})], partition: 1, timestamp: Date.now()}];
-		else  payload = [{topic: topic, messages: [JSON.stringify({status: false})], partition: 1, timestamp: Date.now()}];
-
-		producer.send(payload,function(err,res)
-		{
-			console.log("Sent:");
-			console.log(err);
-			console.log(res);
-		});
-
-		if(res.rowCount == 0)
-		{
-			hash = crypto.createHash('sha256');
-			hash.write(json.pass);
-			var hsh = null;
-			hash.end();
-			while(hsh == null)
-			{
-				hsh = hash.read();
-			}
-			var str = "INSERT INTO account_test (mail, password_hash, username) VALUES ('" + json.mail + "', '" + hsh.toString() + "', 'test');";
-			console.log(str);
-
-			db_client.query(str, function(err,res)
-			{
-				console.log("DB result:");
-				console.log(err);
-				console.log(res);
-				console.log(hsh);
-			});
-		}
-		else console.log("Exists");
-
-	});
-
 });
