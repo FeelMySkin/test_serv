@@ -98,7 +98,7 @@ function InsertToDB(table_name, properties)
 function Register(json)
 {
 	/*JSON file: signal, mail, password_hash, username, socket_id*/
-	GetFromDB('account_test','*','mail=' + json.mail)
+	GetFromDB('account_test','*','mail="' + json.mail + '"')
 	.then(res =>
 	{
 		var backpack;
@@ -111,7 +111,7 @@ function Register(json)
 	})
 	.then(res =>
 	{
-		InsertToDB('account_test',{mail:json.mail, password_hash:json.password_hash, username: json.username});
+		InsertToDB('account_test',{mail:json.mail, password_hash:json.password_hash.data, username: json.username});
 	});
 }
 
