@@ -103,7 +103,7 @@ function Register(json)
 	{
 		var backpack;
 		if(res.rowCount == 0) backpack = JSON.stringify({signal:'register', socket_id: json.socket_id, status:true, message:'Success'});
-		else backpack = JSON.stringify({signal:'register', socket_id: json.socket_id, status:true, message:'Success'});
+		else backpack = JSON.stringify({signal:'register', socket_id: json.socket_id, status:false, message:'Account Exists'});
 
 		SendToKafka(backpack);
 		if(res.rowCount == 0) resolve(1);
@@ -112,6 +112,10 @@ function Register(json)
 	.then(res =>
 	{
 		InsertToDB('account_test',{mail:json.mail, password_hash:json.password_hash.data, username: json.username});
+	})
+	.catch(rej =>
+	{
+		console.log("Reject Status: " + rej);
 	});
 }
 
