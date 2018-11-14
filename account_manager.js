@@ -78,7 +78,7 @@ function InsertToDB(table_name, properties)
 		console.log(x);
 		console.log(properties[x]);
 		prop_name += x + ', ';
-		prop_field += properties[x] + ', ';
+		prop_field += "'" + properties[x].toString() + "', ";
 	}
 
 	prop_name = prop_name.slice(0,prop_name.length-2) + ')';
