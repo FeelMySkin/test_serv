@@ -93,7 +93,7 @@ function Register(json)
 {
 	/*JSON file: signal, mail, password_hash, username, socket_id*/
 	GetFromDB('account_test','*','mail=' + json.mail)
-	.then(function(res)
+	.then(res =>
 	{
 		var backpack;
 		if(res.rowCount == 0) backpack = JSON.stringify({signal:'register', socket_id: json.socket_id, status:true, message:'Success'});
@@ -103,7 +103,7 @@ function Register(json)
 		if(res.rowCount == 0) resolve(1);
 		else reject(1);
 	})
-	.then(function(res)
+	.then(res =>
 	{
 		InsertToDB('account_test',{mail:json.mail, password_hash:json.password_hash, username: json.username});
 	});
