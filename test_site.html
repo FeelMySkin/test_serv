@@ -1,0 +1,31 @@
+<head>
+</head>
+<script>
+    function test()
+    {
+        var xhr = new XMLHttpRequest();
+
+        var body = 'login=' + document.getElementById("login").value +
+        '&pass=' + document.getElementById("pass").value;
+        document.getElementById("test1").text = body;
+
+        xhr.open("POST", 'http://127.0.0.1:1337/login', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        
+        xhr.onloadend = function()
+        {
+            
+            document.getElementById("test1").innerText = xhr.responseText;
+        }
+        xhr.send(body);
+    }
+</script>
+<body>
+<h1 id="test1">test</h1>
+<form>
+    <input type="text" size="80" id="login">
+    <input type="password" id="pass">
+    <input type="button" value="send" onclick="test()">
+</form>
+</body>
