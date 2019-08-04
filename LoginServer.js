@@ -30,9 +30,4 @@ app.post('/login',urlencodedParser, function(req,res)
     
 });
 
-app.get('/login',function(req,res)
-{
-    res.send(opfile);
-});
-
 app.listen(1337);
