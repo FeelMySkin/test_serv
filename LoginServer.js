@@ -1,31 +1,38 @@
-var express = require('express');
-const bodyParser = require("body-parser");
+const express = require('express');
+const bodyParser = require('body-parser');
+const fs = require('fs');
 
+var opfile;
+
+fs.open("./test_site.html","r",(err,fd) => 
+{
+    
+    fs.readFile(fd,(err,data) =>
+    {
+        opfile = data.toString();
+    });
+});
 var app = express();
 
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
 app.post('/login',urlencodedParser, function(req,res)
 {
-    //res.send("post");
-    console.log(req.get('content-type'));
-    console.log(req.header('content-type'));
     console.log(req.body);
-    res.send("Received: " + req.body.login + req.body.pass);
+    var tst = req.body;
+    console.log(tst.type);
+    if(tst.type == undefined) res.send("Error post request");
+    else
+    {
+        if(tst.type == "login") res.send("Received: " + req.body.login + req.body.pass);
+        else if(req.body.type == 'register') res.send("Register: " + req.body.login + req.body.pass);
+    }
+    
 });
 
 app.get('/login',function(req,res)
 {
-    res.send('<head></head>\
-    <body>\
-    <h1 id="test1">test</h1>\
-    <form enctype="application/x-www-form-urlencoded" action="http://127.0.0.1:1337/login" method="POST">\
-        <input type="text" size="80" name="login">\
-        <input type="password" name="pass">\
-        <input type="submit" value="send">\
-    </form>\
-    </body>');
-    console.log(req.params);
+    res.send(opfile);
 });
 
 app.listen(1337);

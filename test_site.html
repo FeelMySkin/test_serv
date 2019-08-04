@@ -6,10 +6,11 @@
         var xhr = new XMLHttpRequest();
 
         var body = 'login=' + document.getElementById("login").value +
-        '&pass=' + document.getElementById("pass").value;
+        '&pass=' + document.getElementById("pass").value + 
+        '&type=login';
         document.getElementById("test1").text = body;
 
-        xhr.open("POST", 'http://127.0.0.1:1337/login', true);
+        xhr.open("POST", './login', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
         
