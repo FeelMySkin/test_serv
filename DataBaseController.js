@@ -12,7 +12,7 @@ const pg = require('knex')({
 module.exports = {
     GetRows: function(column,variable)
     {
-        return knex('test_table');
+        return pg('test_table');
         //return knex('test_table').where(column,variable);
     }
 }
