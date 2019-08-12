@@ -4,6 +4,7 @@ const fs = require('fs');
 const cookieParser = require('cookie-parser');
 const cookie = require('cookie');
 const session = require('express-session');
+const User = require('./DataBaseController');
 
 var opfile;
 

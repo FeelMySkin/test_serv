@@ -1,5 +1,17 @@
-import kafka from 'kafka-node';
+const pg = require('knex')({
+    client: 'pg',
+    connection:
+    {
+        host: '127.0.0.1',
+        user: 'user',
+        password: 'pass',
+        database: 'db'
+    }
+});
 
-Producer = kafka.Producer;
-client = new kafka.KafkaClient();
-producer = new Producer(client);
+module.exports = {
+    GetRows: function(column,variable)
+    {
+        return knex('user').where(column,variable);
+    }
+}
