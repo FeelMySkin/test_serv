@@ -3,15 +3,16 @@ const pg = require('knex')({
     connection:
     {
         host: '127.0.0.1',
-        user: 'user',
-        password: 'pass',
-        database: 'db'
+        user: 'root',
+        password: 'root',
+        database: 'root'
     }
 });
 
 module.exports = {
     GetRows: function(column,variable)
     {
-        return knex('user').where(column,variable);
+        return knex('test_table');
+        //return knex('test_table').where(column,variable);
     }
 }

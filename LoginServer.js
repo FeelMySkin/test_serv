@@ -49,4 +49,11 @@ app.get('/',function(req,res)
 
 });
 
+app.get('/test',function(req,res)
+{
+    var rer = User.GetRows('mail','id');
+    console.log(rer);
+    res.send(rer);
+});
+
 app.listen(1337);
