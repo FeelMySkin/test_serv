@@ -25,6 +25,6 @@ module.exports = {
 
 console.log(pool.query('SELECT * from test_table;', (error,result) =>
 {
-    if(error) throw error;
-    else return result;
+    console.log(error);
+    console.log(result);
 }));
