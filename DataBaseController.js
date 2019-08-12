@@ -12,18 +12,26 @@ const pool = new Pool(
 
 
 module.exports = {
-    GetRows: function(column,variable)
+    GetAll: function(table)
     {
-        return pool.query('SELECT * from test_table;', (error,result) =>
+        (request,response) =>
+        {
+            pool.query('Select * from ' + table + ';', (error,results) =>
             {
-                if(error) throw error;
-                else return result;
+                response.status(200).json(results.rows);
             });
-        //return knex('test_table').where(column,variable);
+        }
+        return response;
     }
 }
 
-console.log(pool.query('SELECT * from test_table;', (error,result) =>
-{
-    return result;
-}));
+console.log(function() {
+    (request,response) =>
+    {
+        pool.query('Select * from ' + table + ';', (error,results) =>
+        {
+            response.status(200).json(results.rows);
+        });
+    }
+    return response;
+});
