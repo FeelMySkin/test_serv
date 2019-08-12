@@ -4,7 +4,7 @@ const pool = new Pool(
         user: 'root',
         host: 'localhost',
         database: 'root',
-        password: 'root',
+        password: '123',
         port: 5432
     }
 );
