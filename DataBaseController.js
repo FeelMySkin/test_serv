@@ -9,29 +9,15 @@ const pool = new Pool(
     }
 );
 
+function GetAll(table)
+{
+    return pool.query('Select * from ' + table + ';');
+}
+
 
 
 module.exports = {
-    GetAll: function(table)
-    {
-        (request,response) =>
-        {
-            pool.query('Select * from ' + table + ';', (error,results) =>
-            {
-                response.status(200).json(results.rows);
-            });
-        }
-        return response;
-    }
+    GetAll
 }
 
-console.log(function() {
-    (request,response) =>
-    {
-        pool.query('Select * from ' + table + ';', (error,results) =>
-        {
-            response.status(200).json(results.rows);
-        });
-    }
-    return response;
-});
+console.log(pool.query('Select * from ' + table + ';'));
