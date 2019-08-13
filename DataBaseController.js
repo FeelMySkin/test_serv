@@ -24,6 +24,7 @@ async function RegisterUser(table,mail,pass)
 {
     return GetRow(table,'mail',mail).
     then(resolve => {
+        console.log(resolve.length);
         if(resolve.length != 0) throw('exists');
         else return resolve;
     }).
@@ -41,7 +42,7 @@ module.exports = {
     RegisterUser
 }
 
-GetRow('test_table','mail','test').then(res => {console.log(res)});
+//GetRow('test_table','mail','test').then(res => {console.log(res)});
 RegisterUser('test_table','test3','pass4').then(res =>{console.log(res);},rej =>{console.log(rej);});
-RegisterUser('test_table','test3','pass5').then(res =>{console.log(res);},rej =>{console.log(rej);});;
-GetAllRows('test_table').then(res => {console.log(res);});
+//RegisterUser('test_table','test3','pass5').then(res =>{console.log(res);},rej =>{console.log(rej);});;
+//GetAllRows('test_table').then(res => {console.log(res);});
