@@ -32,8 +32,10 @@ app.post('/login', function(req,res)
     {
         if(tst.type == "login")
         {
-            
-            res.send("Received: " + req.body.login + req.body.pass);
+            User.UserExists(req.body.login).then(res => {
+                if(res) res.send("Login exists");
+                else res.send("Login not exists");
+            });
         }
         else if(req.body.type == 'register')
         {

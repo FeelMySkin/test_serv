@@ -59,7 +59,8 @@ module.exports = {
     GetAllRows,
     GetRow,
     GetUser,
-    RegisterUser
+    RegisterUser,
+    UserExists
 }
 
 UserExists('test').then(res => console.log(res));

@@ -1,13 +1,12 @@
 <head>
 </head>
 <script>
-    function test()
+    function test(type)
     {
         var xhr = new XMLHttpRequest();
-
         var body = 'login=' + document.getElementById("login").value +
         '&pass=' + document.getElementById("pass").value + 
-        '&type=register';
+        '&type=' + type;
         document.getElementById("test1").text = body;
 
         xhr.open("POST", './login', true);
@@ -27,6 +26,7 @@
 <form>
     <input type="text" size="80" id="login">
     <input type="password" id="pass">
-    <input type="button" value="send" onclick="test()">
+    <input type="button" value="Login" onclick="test('login')">
+    <input type="button" value="Register" onclick="test('register')">
 </form>
 </body>
