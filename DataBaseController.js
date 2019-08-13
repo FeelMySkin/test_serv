@@ -30,6 +30,7 @@ async function GetUser(mail)
 async function UserExists()
 {
     var tst = await GetUser('test');
+    console.log(tst);
     if(tst.length != 0) return true;
     else return false;
 }
