@@ -51,9 +51,11 @@ app.get('/',function(req,res)
 
 app.get('/test',function(req,res)
 {
-    var rer = User.GetRows('mail','id');
-    console.log(rer);
-    res.send(rer);
+    User.GetAll('test_table').then(resolve => {
+        console.log(resolve);
+        res.send(resolve);
+    });
+    
 });
 
 app.listen(1337);
