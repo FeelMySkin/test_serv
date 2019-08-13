@@ -16,7 +16,7 @@ function GetAllRows(table)
 
 async function GetRow(table,column,condition)
 {
-    return pool.query('select * from ' + table + ' where ' + column + '=' + condition + ';').then(res=> {return res.rows;});
+    return pool.query('select * from ' + table + ' where ' + column + '= "' + condition + '";').then(res=> {return res.rows;});
 }
 
 async function RegisterUser(table,mail,pass)
