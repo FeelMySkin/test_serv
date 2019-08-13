@@ -5,9 +5,9 @@
     {
         var xhr = new XMLHttpRequest();
 
-        var body = 'login=' + document.getElementById("register").value +
+        var body = 'login=' + document.getElementById("login").value +
         '&pass=' + document.getElementById("pass").value + 
-        '&type=login';
+        '&type=register';
         document.getElementById("test1").text = body;
 
         xhr.open("POST", './login', true);
