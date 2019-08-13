@@ -38,13 +38,13 @@ async function UserExists(mail)
 
 async function RegisterUser(mail,pass)
 {
-    return GetUser(mail).
+    return UserExists(mail).
     then(resolve => {
-        if(resolve.length != 0) throw('exists');
+        if(resolve) throw('exists');
         else return resolve;
     }).
     then( resolve => {
-        return pool.query('insert into ' + table + " values ('" + mail + "','" + pass + "');");
+        return pool.query('insert into ' + REG_TABLE + " values ('" + mail + "','" + pass + "');");
     },rej => {
         throw(rej);
     })
@@ -62,6 +62,3 @@ module.exports = {
     RegisterUser,
     UserExists
 }
-
-UserExists('test').then(res => console.log(res));
-UserExists('asdasd').then(res => console.log(res));
