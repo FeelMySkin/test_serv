@@ -1,3 +1,6 @@
+const REG_TABLE = 'test_table';
+
+
 const Pool = require('pg').Pool;
 const pool = new Pool(
     {
@@ -19,10 +22,21 @@ async function GetRow(table,column,condition)
     return pool.query('select * from ' + table + ' where ' + column + "='" + condition + "';").then(res=> {return res.rows;});
 }
 
-async function RegisterUser(table,mail,pass)
+async function GetUser(mail)
 {
-    console.log('init reg');
-    return GetRow(table,'mail',mail).
+    return GetRow(REG_TABLE,'mail',mail);
+}
+
+async function UserExists()
+{
+    var tst = await GetUser('test');
+    if(tst.length != 0) return true;
+    else return false;
+}
+
+async function RegisterUser(mail,pass)
+{
+    return GetUser(mail).
     then(resolve => {
         if(resolve.length != 0) throw('exists');
         else return resolve;
@@ -42,5 +56,8 @@ async function RegisterUser(table,mail,pass)
 module.exports = {
     GetAllRows,
     GetRow,
+    GetUser,
     RegisterUser
 }
+
+console.log(UserExists());
