@@ -29,7 +29,7 @@ async function RegisterUser(table,mail,pass)
         else return resolve;
     }).
     then( resolve => {
-        return pool.query('insert into ' + table + ' values ("' + mail + '","' + pass + '");');
+        return pool.query('insert into ' + table + " values ('" + mail + "','" + pass + "');");
     },rej => {
         throw(rej);
     });
