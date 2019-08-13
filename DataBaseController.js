@@ -9,15 +9,38 @@ const pool = new Pool(
     }
 );
 
-function GetAll(table)
+function GetAllRows(table)
 {
     return pool.query('Select * from ' + table + ';').then(res => {return res.rows;});
 }
 
+async function GetRow(table,column,condition)
+{
+    return pool.query('select * from ' + table + ' where ' + column + '=' + condition + ';').then(res=> {return res.rows;});
+}
+
+async function RegisterUser(table,mail,pass)
+{
+    return GetRow(table,'mail',mail).
+    then(resolve => {
+        if(resolve.length != 0) throw('exists');
+        else return resolve;
+    }).
+    then( resolve => {
+        return pool.query('insert into ' + table + ' values (' + mail + ',' + pass + ');');
+    },rej => {
+        throw(rej);
+    });
+}
 
 
 module.exports = {
-    GetAll
+    GetAllRows,
+    GetRow,
+    RegisterUser
 }
 
-GetAll('test_table').then(res => {console.log(res);});
+GetRow('test_table','mail','test').then(res => {console.log(res)});
+RegisterUser('test_table','test3','pass4').then(res =>{console.log(res);},rej =>{console.log(rej);});
+RegisterUser('test_table','test3','pass5').then(res =>{console.log(res);},rej =>{console.log(rej);});;
+GetAllRows('test_table').then(res => {console.log(res);});

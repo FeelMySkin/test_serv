@@ -51,7 +51,7 @@ app.get('/',function(req,res)
 
 app.get('/test',function(req,res)
 {
-    User.GetAll('test_table').then(resolve => {
+    User.GetAllRows('test_table').then(resolve => {
         console.log(resolve);
         res.send(resolve);
     });
