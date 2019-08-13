@@ -20,4 +20,5 @@ module.exports = {
     GetAll
 }
 
-console.log(pool.query('Select * from ' + table + ';'));
+var res = pool.query('select * from test_table;').then(res => {return res});
+console.log(res);
