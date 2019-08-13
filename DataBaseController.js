@@ -9,14 +9,15 @@ const pool = new Pool(
     }
 );
 
-function GetAllRows(table)
+async function GetAllRows(table)
 {
     return pool.query('Select * from ' + table + ';').then(res => {return res.rows;});
 }
 
 async function GetRow(table,column,condition)
 {
-    return pool.query('select * from ' + table + ' where ' + column + '= "' + condition + '";').then(res=> {return res.rows;});
+    console.log('select * from ' + table + ' where ' + column + "='" + condition + "';");
+    return pool.query('select * from ' + table + ' where ' + column + "='" + condition + "';").then(res=> {return res.rows;});
 }
 
 async function RegisterUser(table,mail,pass)
@@ -27,7 +28,7 @@ async function RegisterUser(table,mail,pass)
         else return resolve;
     }).
     then( resolve => {
-        return pool.query('insert into ' + table + ' values (' + mail + ',' + pass + ');');
+        return pool.query('insert into ' + table + ' values ("' + mail + '","' + pass + '");');
     },rej => {
         throw(rej);
     });
