@@ -21,6 +21,7 @@ async function GetRow(table,column,condition)
 
 async function RegisterUser(table,mail,pass)
 {
+    console.log('init reg');
     return GetRow(table,'mail',mail).
     then(resolve => {
         if(resolve.length != 0) throw('exists');
