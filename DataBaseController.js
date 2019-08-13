@@ -11,7 +11,7 @@ const pool = new Pool(
 
 function GetAll(table)
 {
-    return pool.query('Select * from ' + table + ';');
+    return pool.query('Select * from ' + table + ';').then(res => {return res;});
 }
 
 
@@ -20,5 +20,4 @@ module.exports = {
     GetAll
 }
 
-var res = pool.query('select * from test_table;').then(res => {return res});
-console.log(res);
+console.log(GetAll('test_table'));
