@@ -27,12 +27,13 @@ async function GetUser(mail)
     return GetRow(REG_TABLE,'mail',mail);
 }
 
-async function UserExists()
+async function UserExists(mail)
 {
-    var tst = await GetUser('test');
-    console.log(tst);
-    if(tst.length != 0) return true;
-    else return false;
+    return GetUser(mail)
+    .then(res => {
+        if(res.length == 0) return false;
+        else return true;
+    })
 }
 
 async function RegisterUser(mail,pass)
@@ -61,4 +62,5 @@ module.exports = {
     RegisterUser
 }
 
-console.log(UserExists());
+UserExists('test').then(res => console.log(res));
+UserExists('asdasd').then(res => console.log(res));
