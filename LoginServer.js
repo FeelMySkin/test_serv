@@ -32,8 +32,8 @@ app.post('/login', function(req,res)
     {
         if(tst.type == "login")
         {
-            User.UserExists(req.body.login).then(res => {
-                if(res) res.send("Login exists");
+            User.UserExists(req.body.login).then(resolver => {
+                if(resolver) res.send("Login exists");
                 else res.send("Login not exists");
             });
         }
