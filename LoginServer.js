@@ -31,7 +31,12 @@ app.post('/login', function(req,res)
     else
     {
         if(tst.type == "login") res.send("Received: " + req.body.login + req.body.pass);
-        else if(req.body.type == 'register') res.send("Register: " + req.body.login + req.body.pass);
+        else if(req.body.type == 'register')
+        {
+            User.RegisterUser('test_table',req.body.login,req.body.pass)
+            .then( success => {res.send(" Register " + success + ": " + req.body.login + req.body.pass)},
+                    exists => {res.send(exists);});
+        }
     }
     
 });

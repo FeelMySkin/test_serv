@@ -16,7 +16,6 @@ async function GetAllRows(table)
 
 async function GetRow(table,column,condition)
 {
-    console.log('select * from ' + table + ' where ' + column + "='" + condition + "';");
     return pool.query('select * from ' + table + ' where ' + column + "='" + condition + "';").then(res=> {return res.rows;});
 }
 
@@ -24,7 +23,6 @@ async function RegisterUser(table,mail,pass)
 {
     return GetRow(table,'mail',mail).
     then(resolve => {
-        console.log(resolve.length);
         if(resolve.length != 0) throw('exists');
         else return resolve;
     }).
@@ -45,9 +43,3 @@ module.exports = {
     GetRow,
     RegisterUser
 }
-
-//GetRow('test_table','mail','test').then(res => {console.log(res)});
-RegisterUser('test_table','test3','pass4').then(res =>{console.log(res);},rej =>{console.log(rej);});
-RegisterUser('test_table','test3','pass5').then(res =>{console.log(res);},rej =>{console.log(rej);});
-RegisterUser('test_table','test4','pass5').then(res =>{console.log(res);},rej =>{console.log(rej);});
-GetAllRows('test_table').then(res => {console.log(res);});
