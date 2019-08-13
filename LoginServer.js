@@ -33,7 +33,7 @@ app.post('/login', function(req,res)
         if(tst.type == "login") res.send("Received: " + req.body.login + req.body.pass);
         else if(req.body.type == 'register')
         {
-            console.log(reg_init);
+            console.log('reg_init');
             User.RegisterUser('test_table',req.body.login,req.body.pass)
             .then( success => {console.log(success); res.send(" Register " + success + ": " + req.body.login + req.body.pass);},
                     exists => {console.log(exists); res.send(exists);});
