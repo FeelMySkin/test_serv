@@ -32,7 +32,11 @@ async function RegisterUser(table,mail,pass)
         return pool.query('insert into ' + table + " values ('" + mail + "','" + pass + "');");
     },rej => {
         throw(rej);
-    });
+    })
+    .then(
+        res => {return 'success';},
+        rej => {throw(rej);}
+    );
 }
 
 
@@ -44,5 +48,6 @@ module.exports = {
 
 //GetRow('test_table','mail','test').then(res => {console.log(res)});
 RegisterUser('test_table','test3','pass4').then(res =>{console.log(res);},rej =>{console.log(rej);});
-//RegisterUser('test_table','test3','pass5').then(res =>{console.log(res);},rej =>{console.log(rej);});;
-//GetAllRows('test_table').then(res => {console.log(res);});
+RegisterUser('test_table','test3','pass5').then(res =>{console.log(res);},rej =>{console.log(rej);});
+RegisterUser('test_table','test4','pass5').then(res =>{console.log(res);},rej =>{console.log(rej);});
+GetAllRows('test_table').then(res => {console.log(res);});
