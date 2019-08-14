@@ -34,7 +34,11 @@ app.post('/login', function(req,res)
         if(tst.type == "login")
         {
             User.UserExists(req.body.login).then(resolver => {
-                if(resolver) res.send("Login exists");
+                if(resolver)
+                {
+                    res.setHeader('set-cookie',cookie.serialize('login',req.body.login, {maxAge: 30*24*60*60*1000}));
+                    res.send("Login exists");
+                }
                 else res.send("Login not exists");
             });
         }
