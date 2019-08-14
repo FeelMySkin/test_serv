@@ -56,6 +56,7 @@ async function RegisterUser(mail,pass)
 
 
 module.exports = {
+    pool,
     GetAllRows,
     GetRow,
     GetUser,

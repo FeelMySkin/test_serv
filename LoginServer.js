@@ -20,7 +20,7 @@ var app = express();
 app.set('trust proxy',1);
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(session({secret: 'secret', store: new (require('connect-pg-simple')(session))(),resave: false, cookie: {maxAge: 30*24*60*60*1000}}));
+app.use(session({secret: 'secret', store: new (require('connect-pg-simple')({pool: Users.pool}))(),resave: false, cookie: {maxAge: 30*24*60*60*1000}}));
 
 app.post('/login', function(req,res)
 {
