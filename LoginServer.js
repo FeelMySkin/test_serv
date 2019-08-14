@@ -55,13 +55,12 @@ app.post('/login', function(req,res)
 
 app.get('/',function(req,res)
 {
-    res.setHeader('set-cookie',cookie.serialize('name3','test3', { maxAge: 60*60*24*7}));
-    res.setHeader('set-cookie',cookie.serialize('name2','test2', { maxAge: 60*60*24*7}));
     console.log(req.cookies);
     console.log(req.signedCookies);
-    console.log(req.session);
-    console.log(req.sessionID);
-    console.log(req.cookies.sessionID);
+    if(req.cookies.login != undefined)
+    {
+        console.log(req.cookies.login);
+    }
     res.send(opfile);
 
 });
