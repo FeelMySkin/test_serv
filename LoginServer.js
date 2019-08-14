@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const cookie = require('cookie');
 const session = require('express-session');
 const User = require('./DataBaseController');
+const pgSession = require('connect-pg-simple')(session);
 
 var opfile;
 
@@ -20,7 +21,7 @@ var app = express();
 app.set('trust proxy',1);
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(session({secret: 'secret', store: new (require('connect-pg-simple')({pool: User.pool}))(),resave: false, cookie: {maxAge: 30*24*60*60*1000}}));
+app.use(session({secret: 'secret', store: new pgSession({pool: User.pool}),resave: false, cookie: {maxAge: 30*24*60*60*1000}}));
 
 app.post('/login', function(req,res)
 {
